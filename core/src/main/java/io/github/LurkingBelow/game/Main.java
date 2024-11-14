@@ -16,18 +16,27 @@ public class Main extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         characterTexture = new Texture("character.png"); // Make sure character.png is in assets
-        x = 100;
-        y = 100;
+        x = 50;
+        y = 50;
     }
 
     @Override
     public void render() {
         // Handle input
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) y += speed * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) y -= speed * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x -= speed * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x += speed * Gdx.graphics.getDeltaTime();
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && y + characterTexture.getHeight() * 2 < Gdx.graphics.getHeight()) {
+            y += 50.0F;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && y > 0) {
+            y -= 50.0F;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && x > 0) {
+            x -= 50.0F;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && x + characterTexture.getWidth() * 2 < Gdx.graphics.getWidth()) {
+            x += 50.0F;
+        }
+        
+        
         // Render the character
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear screen
         batch.begin();
